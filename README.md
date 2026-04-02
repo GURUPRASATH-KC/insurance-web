@@ -15,28 +15,24 @@
 - Backend → Render  
 - Database → MongoDB Atlas  
 
----
+## 📁 Project Structure
 
-## Project Structure
-
-
+```
 insurance-web/
 │
-├── client/ # Frontend (React + Vite)
-│ ├── src/
-│ ├── public/
-│ └── package.json
+├── client/        # Frontend (React + Vite)
+│   ├── src/
+│   ├── public/
+│   └── package.json
 │
-├── server/ # Backend (Node + Express)
-│ ├── index.js
-│ ├── routes/
-│ ├── models/
-│ └── package.json
+├── server/        # Backend (Node + Express)
+│   ├── index.js
+│   ├── routes/
+│   ├── models/
+│   └── package.json
 │
 └── README.md
-
-
----
+```
 
 ## Environment Variables
 
