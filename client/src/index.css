@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #003366;
+  --color-secondary: #28a745;
+  --color-accent: #1e3a8a; /* Soft Blue */
+  --font-heading: "Outfit", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-slate-50 text-slate-800 antialiased;
+  }
+}
+
+.glass {
+  @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-md;
+}
+
+.soft-card {
+  @apply bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300;
+}
+
+.btn-primary {
+  @apply bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-primary/90 transition-all active:scale-95;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-white px-6 py-3 rounded-xl font-semibold hover:bg-secondary/90 transition-all active:scale-95;
+}
