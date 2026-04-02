@@ -48,7 +48,7 @@ function App() {
       const token = localStorage.getItem('hg_token');
       if (user && token) {
         try {
-          const response = await fetch('http://localhost:5000/api/purchases', {
+          const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/purchases`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           if (response.ok) {
@@ -80,7 +80,7 @@ function App() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/purchases', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/purchases`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
