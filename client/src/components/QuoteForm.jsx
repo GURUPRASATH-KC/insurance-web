@@ -22,7 +22,7 @@ const QuoteForm = () => {
     setStatus({ loading: true, success: false, error: null });
 
     try {
-      await axios.post('http://localhost:5000/api/leads', formData);
+      await axios.post(`${import.meta.env.VITE_API_BASE}/api/leads`, formData);
       setStatus({ loading: false, success: true, error: null });
       setFormData({ name: '', age: '', city: '', familyMembers: 'Self', coverageAmount: '5 Lakhs' });
     } catch (err) {
