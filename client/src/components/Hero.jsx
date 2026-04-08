@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, CheckCircle, Shield } from 'lucide-react';
+import heroImage from '../assets/hero.png';
 
 const Hero = () => {
   return (
@@ -61,7 +62,7 @@ const Hero = () => {
             <div className="relative">
               <div className="bg-white p-4 rounded-[40px] shadow-2xl relative z-10">
                 <img 
-                  src="https://images.unsplash.com/photo-1576089172869-4f5f6f315620?q=80&w=2000&auto=format&fit=crop" 
+                  src={heroImage} 
                   alt="Healthy Family" 
                   className="rounded-[30px] w-full h-auto object-cover aspect-[4/3]"
                 />
