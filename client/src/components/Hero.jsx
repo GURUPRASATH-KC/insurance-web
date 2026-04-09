@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, CheckCircle, Shield } from 'lucide-react';
-import heroImage from '../assets/hero.png';
+import heroImage from '../assets/hero.jpg';
 
 const Hero = () => {
   return (
