@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import ProfileModal from './components/ProfileModal';
 import Partners from './components/Partners';
 import Benefits from './components/Benefits';
 import PlanComparison from './components/PlanComparison';
@@ -38,9 +39,17 @@ function App() {
   const [purchasedPlans, setPurchasedPlans] = useState([]);
   const [showAllPlans, setShowAllPlans] = useState(false);
   const [toast, setToast] = useState(null);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [user, setUser] = useState(() => {
     try { return JSON.parse(localStorage.getItem('hg_user')); } catch { return null; }
   });
+
+  const handleLogout = () => {
+    localStorage.removeItem('hg_token');
+    localStorage.removeItem('hg_user');
+    setUser(null);
+    setIsProfileOpen(false);
+  };
 
   // Fetch purchased plans from backend
   useEffect(() => {
@@ -125,7 +134,12 @@ function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 relative">
-      <Navbar user={user} setUser={setUser} />
+      <Navbar 
+        user={user} 
+        setUser={setUser} 
+        setIsProfileOpen={setIsProfileOpen} 
+        handleLogout={handleLogout}
+      />
       <main>
         <Hero />
         <Partners />
@@ -152,6 +166,14 @@ function App() {
           onClose={() => setToast(null)} 
         />
       )}
+
+      <ProfileModal 
+        isOpen={isProfileOpen}
+        onClose={() => setIsProfileOpen(false)}
+        user={user}
+        purchasedPlans={purchasedPlans}
+        handleLogout={handleLogout}
+      />
     </div>
   );
 }
