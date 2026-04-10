@@ -3,7 +3,7 @@ import { Shield, Menu, X, LogOut } from 'lucide-react';
 import { Link } from 'react-scroll';
 import AuthModal from './AuthModal';
 
-const Navbar = ({ user, setUser }) => {
+const Navbar = ({ user, setUser, setIsProfileOpen, handleLogout }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -25,11 +25,12 @@ const Navbar = ({ user, setUser }) => {
     setUser(userData);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('hg_token');
-    localStorage.removeItem('hg_user');
-    setUser(null);
-  };
+  // Remove local handleLogout as it's passed via props and handled globally in App.jsx
+  // const handleLogout = () => {
+  //   localStorage.removeItem('hg_token');
+  //   localStorage.removeItem('hg_user');
+  //   setUser(null);
+  // };
 
   return (
     <>
@@ -58,15 +59,24 @@ const Navbar = ({ user, setUser }) => {
             ))}
 
             {user ? (
-              <div className="flex items-center gap-3">
-                <span className="text-slate-700 font-medium text-sm">
-                  👋 {user.name.split(' ')[0]}
-                </span>
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={() => setIsProfileOpen(true)}
+                  className="flex items-center gap-2 group cursor-pointer"
+                >
+                  <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-sm border-2 border-white shadow-sm group-hover:bg-blue-600 group-hover:text-white transition-all">
+                    {user.name.charAt(0)}
+                  </div>
+                  <span className="text-slate-700 font-bold text-sm hover:text-primary transition-colors">
+                    {user.name.split(' ')[0]}
+                  </span>
+                </button>
+                <div className="w-px h-4 bg-slate-200" />
                 <button
                   onClick={handleLogout}
-                  className="flex items-center gap-1 text-slate-500 hover:text-red-500 text-sm font-medium transition-colors"
+                  className="flex items-center gap-1 text-slate-400 hover:text-red-500 text-xs font-bold uppercase tracking-wider transition-colors"
                 >
-                  <LogOut className="w-4 h-4" /> Logout
+                  <LogOut className="w-3.5 h-3.5" /> Logout
                 </button>
               </div>
             ) : (
@@ -102,11 +112,23 @@ const Navbar = ({ user, setUser }) => {
               </Link>
             ))}
             {user ? (
-              <div className="flex flex-col gap-2">
-                <span className="text-slate-700 font-medium text-sm">👋 {user.name}</span>
+              <div className="flex flex-col gap-3 p-2 bg-slate-50 rounded-2xl mt-2">
+                <button 
+                  onClick={() => { setIsProfileOpen(true); setIsMobileMenuOpen(false); }}
+                  className="flex items-center gap-3 text-slate-700 font-bold text-sm p-2"
+                >
+                  <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center">
+                    {user.name.charAt(0)}
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span>{user.name}</span>
+                    <span className="text-[10px] text-blue-600 uppercase tracking-widest font-black">View Profile</span>
+                  </div>
+                </button>
+                <div className="h-px bg-slate-200 mx-2" />
                 <button
                   onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }}
-                  className="flex items-center gap-2 text-red-500 font-medium text-sm"
+                  className="flex items-center gap-2 text-red-500 font-bold text-sm p-2 px-4"
                 >
                   <LogOut className="w-4 h-4" /> Logout
                 </button>
